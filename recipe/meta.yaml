@@ -1,0 +1,17 @@
+package:
+    name: epsic
+    version: {{ os.popen('git log -1 --format="%cd" --date=short','r').readline().replace('-','.') }}
+
+source:
+    path: ../epsic
+        
+build:
+    number: 1
+    string: {{ os.popen('git log -1 --format="%h"','r').readline() }}
+
+requirements:
+    build:
+        - {{ compiler('cxx') }}
+        - autoconf
+        - automake
+        - libtool
