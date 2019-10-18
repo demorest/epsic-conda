@@ -19,7 +19,10 @@ before_install:
     - export LANG=en_US.UTF-8
 install:
     - git clone --depth=1 https://github.com/straten/epsic.git
-    - export VERSION=`git -C epsic log -1 --format="%cd" --date=short epsic | sed 's/-/./g'`
+    # Could get the number of commits on a given date like:
+    # git -C epsic log --format="%cd" --date=short | uniq -c | head -n1
+    # Then split it up inside the meta.yaml.
+    - export VERSION=$(git -C ./epsic log -1 --format='%cd' --date=short | sed 's/-/./g')
     - conda build recipe
     - conda activate
     - conda install epsic --use-local
