@@ -19,6 +19,7 @@ before_install:
     - export LANG=en_US.UTF-8
 install:
     - git clone --depth=1 https://github.com/straten/epsic.git
+    - export VERSION=`git -C epsic log -1 --format="%cd" --date=short epsic | sed 's/-/./g'`
     - conda build recipe
     - conda activate
     - conda install epsic --use-local

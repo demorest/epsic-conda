@@ -1,13 +1,19 @@
 package:
     name: epsic
-    version: {{ os.popen('git log -1 --format="%cd" --date=short','r').readline().replace('-','.') }}
+    version: {{ os.environ.get('VERSION') }} 
+    #version: {{ os.popen('git log -1 --format="%cd" --date=short','r').readline().replace('-','.') }}
 
 source:
+    # This assumes the source has already been checked out
+    # and lives in the specified path:
     path: ../epsic
+    # Alternately, have conda download the latest version
+    # directly:
+    #git_url: git clone --depth=1 https://github.com/straten/epsic.git
+    #git_depth: 1
         
 build:
     number: 1
-    string: {{ os.popen('git log -1 --format="%h"','r').readline() }}
 
 requirements:
     build:
