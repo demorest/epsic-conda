@@ -29,3 +29,7 @@ install:
     - conda install epsic --use-local
 script:
     - epsic
+after_success:
+    - export PKGFILE=$(conda build recipe --output)
+    - conda install anaconda-client
+    - anaconda -t $CONDA_UPLOAD_TOKEN upload -u demorest --force $PKGFILE
